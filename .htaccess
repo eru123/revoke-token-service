@@ -1,0 +1,26 @@
+DirectoryIndex index.php
+
+# enable apache rewrite engine
+RewriteEngine on
+
+# set your rewrite base
+# Edit this in your init method too if you script lives in a subfolder
+RewriteBase /
+
+# Disbale directory listing
+Options -Indexes
+
+# Deliver the folder or file directly if it exists on the server
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Push every request to index.php
+RewriteRule ^(.*)$ api/index.php [QSA,L]
+
+# Rewrite for HTTP_AUTHORIZATION
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+# Security
+Header set Referrer-Policy "no-referrer"
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
