@@ -17,7 +17,7 @@ define('CONFIG', [
     'MYSQL_CHARSET' => @$_ENV['MYSQL_CHARSET'],
     'MYSQL_OPTIONS' => [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-            \PDO::MYSQL_ATTR_SSL_CA => $_ENV['PLANETSCALE_SSL_CERT_PATH']
+            \PDO::MYSQL_ATTR_SSL_CA => $_ENV['PLANETSCALE_SSL_CERT_PATH'] // __DIR__ . '/../certs/cacert.pem'
     ],
 ]);
 
